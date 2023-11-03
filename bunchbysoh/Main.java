@@ -9,7 +9,18 @@ public class Main {
 
   static CountsBySoH countBatteriesByHealth(int[] presentCapacities) {
     CountsBySoH counts = new CountsBySoH();
-    return counts;
+  int rated_capacity = 120;
+  for (int i = 0; i < presentCapacities.length; i++) {
+    double SoH = 100.0 * presentCapacities[i] / rated_capacity;
+    if (SoH > 80) {
+      counts.healthy += 1;
+    } else if (SoH >= 62) {
+      counts.exchange += 1;
+    } else {
+      counts.failed += 1;
+    }
+  }
+  return counts;
   }
 
   static void testBucketingByHealth() {
